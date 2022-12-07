@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/socib/API_examples:
+      branch: master
+      repo: https://github.com/socib/API_examples
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/socib/API_examples git:
+        commands:
+        - /usr/bin/env sh .sqa/script.tasty-sangria-jellyfish.sh
+        container: qc.acc_breezy-ochre-chimpanzee
+  QC.Doc:
+    repos:
+      github.com/socib/API_examples find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.wiggy-flax-moose.sh
+        container: qc.doc_gloppy-jade-tzu
+      github.com/socib/API_examples git:
+        commands:
+        - /usr/bin/env sh .sqa/script.homey-brown-boar.sh
+        container: qc.doc_lanky-cobalt-wombat
+      github.com/socib/API_examples markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-rust-swan.sh
+        container: qc.doc_scummy-cornflower-bee
+  QC.Lic:
+    repos:
+      github.com/socib/API_examples licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.dorky-violet-butterfly.sh
+        container: qc.lic_smelly-burgundy-indri
+  QC.Sec:
+    repos:
+      github.com/socib/API_examples bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-sapphire-markhor.sh
+        container: qc.sec_wimpy-gamboge-rat
+  QC.Sty:
+    repos:
+      github.com/socib/API_examples flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.crabby-tangerine-ferret.sh
+        container: qc.sty_muzzy-ultramarine-lobster
+      github.com/socib/API_examples jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.scanty-mauve-zorse.sh
+        container: qc.sty_snoopy-periwinkle-moth
+  QC.Ver:
+    repos:
+      github.com/socib/API_examples get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.slimy-azure-dragon.sh
+        container: qc.ver_pasty-eggplant-dragon
+timeout: 1800
